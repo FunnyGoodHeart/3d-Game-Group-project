@@ -7,48 +7,86 @@ public class PlayerAttack : MonoBehaviour
 {
     [Header("Numbers")]
     [SerializeField] public int playerATK = 10;
-    [SerializeField] float SwordCoolDown = 2f;
-    [SerializeField] float AtkTime = 0.5f;
+    [SerializeField] float swordCoolDown = 2f;
+    [SerializeField] float atkTime = 0.5f;
 
     [Header("Game Objects")]
-    [SerializeField] GameObject Sword;
-    [SerializeField] GameObject SwordBox;
+    [SerializeField] GameObject sword;
+    [SerializeField] GameObject swordBox;
+    [SerializeField] GameObject bow;
 
     //ect
-    BoxCollider BoxColl;
+    BoxCollider swordBoxColl;
     Transform swordTrans;
+    MeshRenderer swordShow;
+    MeshRenderer bowShow;
+    //sword bools
     bool justAttacked = false;
-    bool SwordCoolDownActive = false;
+    bool swordCoolDownActive = false;
     bool swordReset = false;
     bool activeSword = true;
-    float SwordTimerCD;
-    float SwordResetTime;
+    //Bow bools
+    bool activeBow = false;
+    public bool bowAttack = false;
+    //timers
+    float TimerCD;
+    float ResetTime;
     void Start()
     {
-        BoxColl = SwordBox.GetComponent<BoxCollider>();
-        BoxColl.enabled = false;
+        swordBoxColl = swordBox.GetComponent<BoxCollider>();
+        swordBoxColl.enabled = false;
+        swordShow = sword.GetComponent<MeshRenderer>();
+        bowShow = bow.GetComponent<MeshRenderer>();
+        bowShow.enabled = false;
     }
 
     void Update()
     {
-        SwordTimerCD += Time.deltaTime; //coolDown
-        SwordResetTime += Time.deltaTime;
-        SwordUpdate();
+        TimerCD += Time.deltaTime; //coolDown
+        ResetTime += Time.deltaTime; 
+        if(activeSword == true)
+        {
+            SwordUpdate();
+        }
+    }
+    void OnSwordSwitch()
+    {
+        if (activeSword == false)
+        {
+            activeBow = false;
+            activeSword = true;
+            bowShow.enabled = false;
+            swordShow.enabled = true;
+        }
+    }
+    void OnBowSwitch()
+    {
+        if(activeBow == false)
+        {
+            activeSword = false;
+            activeBow = true;
+            swordShow.enabled = false;
+            bowShow.enabled = true;
+        }
     }
     void OnAttack() 
     {
         if(justAttacked == false)
         {
-            if(activeSword == true)
+            if (activeSword == true)
             {
-                swordTrans = Sword.GetComponent<Transform>();
+                swordTrans = sword.GetComponent<Transform>();
                 Debug.Log("Swoosh");
-                Sword.transform.Rotate(0, 0, -90); // rotates sword if player clicks
-                Sword.transform.position = new Vector3(swordTrans.position.x + 0, swordTrans.position.y - 1, swordTrans.position.z + 0);
-                BoxColl.enabled = true;
+                sword.transform.Rotate(0, 0, -90); // rotates sword if player clicks
+                sword.transform.position = new Vector3(swordTrans.position.x + 0, swordTrans.position.y - 1, swordTrans.position.z + 0);
+                swordBoxColl.enabled = true;
                 justAttacked = true;
                 swordReset = true;
-                SwordResetTime = 0;
+                ResetTime = 0;
+            }
+            else if (activeBow == true)
+            {
+                bowAttack = true;
             }
         }
     }
@@ -56,26 +94,26 @@ public class PlayerAttack : MonoBehaviour
     {
         if (justAttacked == true) //prevents player from attacking again right after
         {
-            if (SwordCoolDownActive == false)
+            if (swordCoolDownActive == false)
             {
                 Debug.Log("CD start");
-                SwordTimerCD = 0f;
-                SwordCoolDownActive = true;
+                TimerCD = 0f;
+                swordCoolDownActive = true;
             }
-            else if (SwordTimerCD >= SwordCoolDown && SwordCoolDownActive == true)
+            else if (TimerCD >= swordCoolDown && swordCoolDownActive == true)
             {
                 Debug.Log("cooldown end");
-                SwordCoolDownActive = false;
+                swordCoolDownActive = false;
                 justAttacked = false;
             }
         }
-        if (swordReset == true && SwordResetTime >= AtkTime)
+        if (swordReset == true && ResetTime >= atkTime)
         {
-            swordTrans = Sword.GetComponent<Transform>();
+            swordTrans = sword.GetComponent<Transform>();
             Debug.Log("Reset");
-            Sword.transform.Rotate(0, 0, 90);
-            Sword.transform.position = new Vector3(swordTrans.position.x - 0, swordTrans.position.y + 1, swordTrans.position.z - 0);
-            BoxColl.enabled = false;
+            sword.transform.Rotate(0, 0, 90);
+            sword.transform.position = new Vector3(swordTrans.position.x - 0, swordTrans.position.y + 1, swordTrans.position.z - 0);
+            swordBoxColl.enabled = false;
             swordReset = false;
         }
     }
