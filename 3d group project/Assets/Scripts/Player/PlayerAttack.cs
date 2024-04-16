@@ -28,7 +28,6 @@ public class PlayerAttack : MonoBehaviour
     bool justAttacked = false;
     bool CoolDownActive = false;
     bool swordReset = false;
-    bool bowReset = false;
     bool activeSword = true;
     //Bow bools
     bool activeBow = false;

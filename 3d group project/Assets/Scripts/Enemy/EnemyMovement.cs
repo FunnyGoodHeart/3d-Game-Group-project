@@ -6,7 +6,6 @@ public class EnemyMovement : MonoBehaviour
 {
     [SerializeField] GameObject player;
     [SerializeField] float chaseDistance = 10;
-    [SerializeField] float stayAway = 0.5f;
     [SerializeField] int gotHitTimeRange = 5;
     bool startChasing = false;
     float gotHitTimer;
@@ -35,7 +34,7 @@ public class EnemyMovement : MonoBehaviour
             startChasing = false;
             emyHealth.enemyGotHit = false;
         }
-        if (moveDir.magnitude < chaseDistance && moveDir.magnitude > stayAway || startChasing == true) // if the player is close
+        if (moveDir.magnitude < chaseDistance || startChasing == true) // if the player is close
         {
             agent.destination = player.transform.position;
         }

@@ -9,28 +9,15 @@ public class EnemyAttack : MonoBehaviour
     [SerializeField] bool rangedAttack;
 
     [Header("Atk")]
-    public int enemyATK = 2;
-    public int enemy2ndATK = 1; //if the enemy has 2 different ways to get hit
+    public int enemyPhysicalATK = 2;
+    public int enemyRangeATK = 1; 
 
-    [Header("Colliders")]
-    [SerializeField] GameObject sphere;
-    [SerializeField] GameObject detectSphere;
-
-    SphereCollider hitRange;
     private void Start()
     {
-        hitRange = sphere.GetComponent<SphereCollider>();
-        hitRange.enabled = false;
+        
     }
     private void Update()
     {
         
-    }
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(collision.gameObject.tag == "Player")
-        {
-
-        }
     }
 }
