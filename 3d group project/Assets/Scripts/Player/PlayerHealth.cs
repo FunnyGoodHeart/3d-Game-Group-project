@@ -6,7 +6,9 @@ using UnityEngine.UI;
 public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] int playerHP = 50;
+    [SerializeField] int healAmmount = 10;
     [SerializeField] GameObject stats;
+    [SerializeField] bool testingHealth = false;
     int playerMaxHP;
     Slider healthBar;
     GameObject emyHitBox;
@@ -16,17 +18,36 @@ public class PlayerHealth : MonoBehaviour
         playerMaxHP = playerHP;
         healthBar = stats.GetComponentInChildren<Slider>();
         healthBar.maxValue = playerMaxHP;
+        if (testingHealth == true)
+        {
+            playerHP -= 40;
+        }
         healthBar.value = playerHP;
     }
     private void OnTriggerEnter(Collider collison)
     {
-        if(collison.gameObject.tag == "EnemyClostHit")
+        if (collison.gameObject.tag == "EnemyClostHit")
         {
-            emyHitBox = collison.gameObject;
+            emyHitBox = collison.gameObject; //collects info
             emyATK = emyHitBox.GetComponent<EnemyCloseAtk>();
-            playerHP -= emyATK.atkHolding;
+            if (emyATK.enemyAttacked == false)
+            {
+                playerHP -= emyATK.atkHolding;
+                healthBar.value = playerHP;
+                emyATK.enemyAttacked = true; //if false then atk
+                Debug.Log(playerHP);
+            }
+        }
+        if(collison.gameObject.tag == "HealingItem" && playerHP <= playerMaxHP)
+        {
+            Debug.Log("healing");
+            playerHP += healAmmount;
+            if(playerHP >= playerMaxHP)
+            {
+                playerHP = playerMaxHP;
+            }
             healthBar.value = playerHP;
-            Debug.Log(playerHP);
+            Destroy(collison.gameObject);
         }
     }
 }

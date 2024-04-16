@@ -7,7 +7,7 @@ public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] int enemyHP = 10;
     [SerializeField] GameObject Player;
-    public bool enemyGotHit = false; //if enemy gets hit by bullet
+    public bool enemyGotHit = false; //if enemy gets hit by bullet & out of chase range
     Slider enemySlider;
     PlayerAttack PlAtk;
     void Start()
@@ -28,17 +28,21 @@ public class EnemyHealth : MonoBehaviour
     }
     private void OnTriggerEnter(Collider collision)
     {
-        if (enemyHP == enemySlider.maxValue)
-        {
-            GetComponentInChildren<Canvas>().enabled = true;
-        }
         if (collision.gameObject.tag == "PlayerSword")
         {
+            if (enemyHP == enemySlider.maxValue)
+            {
+                GetComponentInChildren<Canvas>().enabled = true;
+            }
             enemyHP -= PlAtk.playerSwordATK;
             enemySlider.value = enemyHP;
         }
         if (collision.gameObject.tag == "PlayerBullet")
         {
+            if (enemyHP == enemySlider.maxValue)
+            {
+                GetComponentInChildren<Canvas>().enabled = true;
+            }
             enemyHP -= PlAtk.playerBowATK;
             enemySlider.value = enemyHP;
             enemyGotHit = true;

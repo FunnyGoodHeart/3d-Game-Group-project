@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerBowShoot : MonoBehaviour
 {
@@ -8,10 +9,18 @@ public class PlayerBowShoot : MonoBehaviour
     [SerializeField] GameObject playerBullet;
     [SerializeField] Transform projectileSpawn;
     [SerializeField] float shootSpeed = 1f;
+    [SerializeField] int bulletCount = 50;
+    [SerializeField] GameObject stats;
+    int maxBulletCount;
+    Slider bulletSlider;
     PlayerAttack plAtk;
     void Start()
     {
         plAtk = player.GetComponent<PlayerAttack>();
+        maxBulletCount = bulletCount;
+        bulletSlider = stats.GetComponentInChildren<Slider>();
+        bulletSlider.maxValue = maxBulletCount;
+        bulletSlider.value = bulletCount;
     }
 
     void Update()
