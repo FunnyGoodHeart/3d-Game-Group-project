@@ -18,6 +18,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] GameObject bow;
     [SerializeField] GameObject swordTransform;
     //ect
+    PlayerBowShoot plBowShoots;
     BoxCollider swordBoxColl;
     Transform swordTrans;
     Transform swordPlacement;
@@ -42,6 +43,7 @@ public class PlayerAttack : MonoBehaviour
         swordShow = sword.GetComponent<MeshRenderer>();
         swordPlacement = swordTransform.GetComponent<Transform>();
         bowShow = bow.GetComponent<MeshRenderer>();
+        plBowShoots = bow.GetComponent<PlayerBowShoot>();
         bowShow.enabled = false;
     }
 
@@ -125,6 +127,20 @@ public class PlayerAttack : MonoBehaviour
             sword.transform.position = new Vector3(swordPlacement.position.x, swordPlacement.position.y, swordPlacement.position.z);
             swordBoxColl.enabled = false;
             swordReset = false;
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "AmmoRegen" && plBowShoots.bulletCount < plBowShoots.maxBulletCount)
+        {
+            Debug.Log("ammo collection");
+            int bulletAdd = Random.Range(plBowShoots.minBulletAdd, plBowShoots.maxBulletCount);
+            plBowShoots.bulletCount += bulletAdd;
+            if(plBowShoots.bulletCount > plBowShoots.maxBulletCount)
+            {
+                plBowShoots.bulletCount = plBowShoots.maxBulletCount;
+            }
+            Destroy(other.gameObject);
         }
     }
 }

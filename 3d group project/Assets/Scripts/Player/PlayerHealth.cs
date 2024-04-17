@@ -7,22 +7,27 @@ public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] int playerHP = 50;
     [SerializeField] int healAmmount = 10;
-    [SerializeField] GameObject stats;
-    [SerializeField] bool testingHealth = false;
-    int playerMaxHP;
+    [SerializeField] GameObject healthBarHold;
+    [SerializeField] Canvas deathScreen;
     Slider healthBar;
+    int playerMaxHP;
     GameObject emyHitBox;
     EnemyCloseAtk emyATK;
+    EnemyAmmo emyAm;
     private void Start()
     {
         playerMaxHP = playerHP;
-        healthBar = stats.GetComponentInChildren<Slider>();
+        healthBar = healthBarHold.GetComponent<Slider>();
         healthBar.maxValue = playerMaxHP;
-        if (testingHealth == true)
-        {
-            playerHP -= 40;
-        }
         healthBar.value = playerHP;
+        deathScreen.enabled = false;
+    }
+    private void Update()
+    {
+        if(playerHP <= 0)
+        {
+            deathScreen.enabled = true;
+        }
     }
     private void OnTriggerEnter(Collider collison)
     {
@@ -38,7 +43,15 @@ public class PlayerHealth : MonoBehaviour
                 Debug.Log(playerHP);
             }
         }
-        if(collison.gameObject.tag == "HealingItem" && playerHP <= playerMaxHP)
+        if(collison.gameObject.tag == "enemyBullet")
+        {
+            GameObject emyAmHold = collison.gameObject;
+            emyAm = emyAmHold.GetComponent<EnemyAmmo>();
+            playerHP -= emyAm.enemyAmmoDamage;
+            healthBar.value = playerHP;
+            Destroy(collison.gameObject);
+        }
+        if(collison.gameObject.tag == "HealingItem" && playerHP < playerMaxHP)
         {
             Debug.Log("healing");
             playerHP += healAmmount;

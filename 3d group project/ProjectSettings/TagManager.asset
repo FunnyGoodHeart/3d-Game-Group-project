@@ -10,6 +10,8 @@ TagManager:
   - PlayerBullet
   - EnemyClostHit
   - HealingItem
+  - AmmoRegen
+  - enemyBullet
   layers:
   - Default
   - TransparentFX
