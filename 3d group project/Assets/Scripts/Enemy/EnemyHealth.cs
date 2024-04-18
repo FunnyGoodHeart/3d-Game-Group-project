@@ -7,9 +7,14 @@ public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] int enemyHP = 10;
     [SerializeField] GameObject Player;
+    [SerializeField] GameObject healItem;
+    [SerializeField] GameObject bulletItem;
     public bool enemyGotHit = false; //if enemy gets hit by bullet & out of chase range
     Slider enemySlider;
     PlayerAttack PlAtk;
+    int chanceForHeal;
+    int chanceForAmmo;
+    
     void Start()
     {
         PlAtk = Player.GetComponent<PlayerAttack>();
@@ -17,12 +22,22 @@ public class EnemyHealth : MonoBehaviour
         enemySlider.maxValue = enemyHP;
         enemySlider.value = enemyHP;
         GetComponentInChildren<Canvas>().enabled = false;
+        chanceForHeal = Random.Range(1, 6);
+        chanceForAmmo = Random.Range(1, 6);
     }
 
     void Update()
     {
         if(enemyHP <= 0)
         {
+            if(chanceForHeal == 1)
+            {
+                GameObject item = Instantiate(healItem, transform.position, Quaternion.identity);
+            }
+            if(chanceForAmmo == 1)
+            {
+                GameObject item = Instantiate(bulletItem, transform.position, Quaternion.identity);
+            }
             Destroy(gameObject);
         }
     }
