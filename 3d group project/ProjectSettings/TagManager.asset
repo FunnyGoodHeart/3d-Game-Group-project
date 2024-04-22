@@ -7,6 +7,11 @@ TagManager:
   - CinemachineTarget
   - Enemy
   - PlayerSword
+  - PlayerBullet
+  - EnemyClostHit
+  - HealingItem
+  - AmmoRegen
+  - enemyBullet
   layers:
   - Default
   - TransparentFX
