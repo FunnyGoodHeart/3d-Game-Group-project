@@ -7,6 +7,10 @@ public class PauseMenu : MonoBehaviour
 {
     [SerializeField] Canvas pauseMenu;
 
+    private void Start()
+    {
+        pauseMenu.enabled = false;
+    }
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape) && Time.timeScale == 1)
