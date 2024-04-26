@@ -16,10 +16,6 @@ public class PeacefulMovement : MonoBehaviour
     }
     void Update()
     {
-        timer -= Time.deltaTime;
-        if (flying == false && timer == 0)
-        {
-            timer = Random.Range(minRandomTimer, maxRandomTimer);
-        }
+        
     }
 }
