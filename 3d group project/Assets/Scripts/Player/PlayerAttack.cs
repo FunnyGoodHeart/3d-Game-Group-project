@@ -100,7 +100,7 @@ public class PlayerAttack : MonoBehaviour
             {
                 swordTrans = sword.GetComponent<Transform>();
                 Debug.Log("Swoosh");
-                sword.transform.Rotate(0, 0, -90); // rotates sword if player clicks
+                sword.transform.Rotate(0, 0, 90); // rotates sword if player clicks
                 sword.transform.position = new Vector3(swordTrans.position.x + 0, swordTrans.position.y -0.5f, swordTrans.position.z +0);
                 swordBoxColl.enabled = true;
                 justAttacked = true;
@@ -123,7 +123,7 @@ public class PlayerAttack : MonoBehaviour
         {
             swordTrans = sword.GetComponent<Transform>();
             Debug.Log("Reset");
-            sword.transform.Rotate(0, 0, 90);
+            sword.transform.Rotate(0, 0, -90);
             sword.transform.position = new Vector3(swordPlacement.position.x, swordPlacement.position.y, swordPlacement.position.z);
             swordBoxColl.enabled = false;
             swordReset = false;
