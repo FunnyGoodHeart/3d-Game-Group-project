@@ -12,6 +12,8 @@ TagManager:
   - HealingItem
   - AmmoRegen
   - enemyBullet
+  - EnemyAttack
+  - InPlayerRange
   layers:
   - Default
   - TransparentFX
