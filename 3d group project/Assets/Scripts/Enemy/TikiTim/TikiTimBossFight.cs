@@ -40,6 +40,7 @@ public class TikiTimBossFight : MonoBehaviour
 
     //ect
     int slapOrStomp;
+    bool dead = false;
     bool isAttacking = false;
     bool cDActive = false;
     bool justHit = false;
@@ -70,30 +71,44 @@ public class TikiTimBossFight : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(isAttacking);
         timer += Time.deltaTime;
-        Vector3 moveDir = player.transform.position - transform.position;
-        BossAttacking();
         if (justHit == true && cDActive == false)
         {
-            isAttacking = false;
+            Debug.Log("cd Start");
+            //isAttacking = false;
             cDActive = true;
+            hitBox.enabled = false;
             timer = 0;
         }
-        else if(cDActive == true || timer >= bossHitCoolDown)
+        else if(cDActive == true && timer >= bossHitCoolDown)
         {
+            Debug.Log("CD finish");
             justHit = false;
+            cDActive = false;
+            isAttacking = false;
+            ani.SetBool("IsAttacking", false);
         }
-        if (BA.inTheBossArea == true && isAttacking == false) //starts chaisng player and start chase timer
+        else if (BA.inTheBossArea == true && isAttacking == false && dead == false)
         {
+            Debug.Log("moving");
             agent.destination = player.transform.position;
             ani.SetFloat("Speed", agent.destination.magnitude);
-            
+
             if (bossHealthShowing == false)
             {
                 backGroundSlider.enabled = true;
                 fillSlider.enabled = true;
                 bossHealthText.enabled = true;
             }
+        }
+        BossAttacking();
+        if (dead == false && bossHealth <= 0)
+        {
+            Transform stay = GetComponent<Transform>();
+            agent.destination = stay.transform.position;
+            ani.SetBool("IsDieing", true);
+            dead = true;
         }
     }
     private void OnTriggerEnter(Collider other)
@@ -108,20 +123,28 @@ public class TikiTimBossFight : MonoBehaviour
                 BA.inTheBossArea = true;
             }
         }
+        if (other.gameObject.tag == "PlayerSword")
+        {
+            bossHealth -= plAtk.playerBowATK;
+            boosHealthSlider.value = bossHealth;
+        }
     }
     void BossAttacking()
     {
-        if (justHit == false && plRan.playerIsInRange == true)
+        if (justHit == false && plRan.playerIsInRange == true && dead == false)
         {
+            Debug.Log("attacking");
             isAttacking = true;
             ani.SetBool("IsAttacking", true);
             hitBox.enabled = true;
             if(slapOrStomp == 1)
             {
+                Debug.Log("slap");
                 ani.SetTrigger("IsSlapping");
             }
             else if(slapOrStomp == 2)
             {
+                Debug.Log("stomp");
                 ani.SetTrigger("IsStomping");
             }
             slapOrStomp = Random.Range(1, 3);

@@ -8,14 +8,17 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] int playerHP = 50;
     [SerializeField] int healAmmount = 10;
     [SerializeField] GameObject healthBarHold;
+    [SerializeField] GameObject boss;
     [SerializeField] Canvas deathScreen;
     Slider healthBar;
     int playerMaxHP;
+    TikiTimBossFight tiki;
     GameObject emyHitBox;
     EnemyCloseAtk emyATK;
     EnemyAmmo emyAm;
     private void Start()
     {
+        tiki = boss.GetComponent<TikiTimBossFight>();
         playerMaxHP = playerHP;
         healthBar = healthBarHold.GetComponent<Slider>();
         healthBar.maxValue = playerMaxHP;
@@ -50,6 +53,12 @@ public class PlayerHealth : MonoBehaviour
             playerHP -= emyAm.enemyAmmoDamage;
             healthBar.value = playerHP;
             Destroy(collison.gameObject);
+        }
+        if(collison.gameObject.tag == "BossEnemyAttack")
+        {
+            Debug.Log("boss hit");
+            playerHP -= tiki.bossDmg;
+            healthBar.value = playerHP;
         }
         if(collison.gameObject.tag == "HealingItem" && playerHP < playerMaxHP)
         {
