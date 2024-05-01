@@ -136,7 +136,7 @@ LODGroup:
     renderers:
     - renderer: {fileID: 4156383876195983604}
     - renderer: {fileID: 472131001279065013}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!136 &8600234810645639620
 CapsuleCollider:
   m_ObjectHideFlags: 0
