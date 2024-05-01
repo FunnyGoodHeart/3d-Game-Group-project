@@ -14,12 +14,18 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] int gotHitTimeRange = 5;
     bool startChasing = false;
     float gotHitTimer;
+    Animator ani;
     EnemyHealth emyHealth;
+    EnemyCloseAtk emyCA;
+    EnemyAttack emyAtk;
     NavMeshAgent agent;
     Vector3 home;
 
     void Start()
     {
+        ani = GetComponent<Animator>();
+        emyCA = GetComponentInChildren<EnemyCloseAtk>();
+        emyAtk = GetComponent<EnemyAttack>();
         home = transform.position;
         agent = GetComponent<NavMeshAgent>();
         emyHealth = GetComponent<EnemyHealth>();
@@ -29,29 +35,32 @@ public class EnemyMovement : MonoBehaviour
     {
         if(movingEnemy == true)
         {
-            gotHitTimer += Time.deltaTime;
-            Vector3 moveDir = player.transform.position - transform.position;
-            if (emyHealth.enemyGotHit == true && startChasing == false) //starts chaisng player and start chase timer
+            if(emyAtk.rangedAttack == true || emyAtk.physicalAttack == true && emyCA.IsAttacking == false)
             {
-                gotHitTimer = 0;
-                startChasing = true;
-            }
-            if (gotHitTimer >= gotHitTimeRange) //end out of chase range chase
-            {
-                startChasing = false;
-                emyHealth.enemyGotHit = false;
-            }
-            if (moveDir.magnitude < chaseDistance || startChasing == true) // if the player is close
-            {
-                agent.destination = player.transform.position;
-            }
-            else //player too far away
-            {
-                Debug.Log("must of been the wind");
-                agent.destination = home;
+                gotHitTimer += Time.deltaTime;
+                Vector3 moveDir = player.transform.position - transform.position;
+                if (emyHealth.enemyGotHit == true && startChasing == false) //starts chaisng player and start chase timer
+                {
+                    gotHitTimer = 0;
+                    startChasing = true;
+                }
+                if (gotHitTimer >= gotHitTimeRange) //end out of chase range chase
+                {
+                    startChasing = false;
+                    emyHealth.enemyGotHit = false;
+                }
+                if (moveDir.magnitude < chaseDistance || startChasing == true) // if the player is close
+                {
+                    agent.destination = player.transform.position;
+                }
+                else //player too far away
+                {
+                    Debug.Log("must of been the wind");
+                    agent.destination = home;
+                }
             }
         }
-        if(stillEnemy == true)
+        else if(stillEnemy == true)
         {
             
             transform.LookAt(player.transform.position);

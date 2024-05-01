@@ -6,8 +6,8 @@ public class EnemyAttack : MonoBehaviour
 {
     //for the parent of the enemy
     [Header("Attack Kind")]
-    [SerializeField] bool physicalAttack;
-    [SerializeField] bool rangedAttack;
+    public bool physicalAttack;
+    public bool rangedAttack;
 
     [Header("Atk")]
     public int enemyPhysicalATK = 2; //check bullet for to change dmg
@@ -22,6 +22,7 @@ public class EnemyAttack : MonoBehaviour
     [SerializeField] GameObject bullet;
     [SerializeField] float bulletLifetime = 2;
     float timer = 0;
+    Animator ani;
     [SerializeField] float shootDistance = 7;
     void Update()
     {

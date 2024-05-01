@@ -6,12 +6,12 @@ using UnityEngine.UI;
 public class PlayerBowShoot : MonoBehaviour
 {
     [SerializeField] GameObject player;
-    [SerializeField] GameObject playerBullet;
-    [SerializeField] Transform projectileSpawn;
+    [SerializeField] GameObject playerBullet; //bullet prefab
+    [SerializeField] Transform projectileSpawn; //place where arrows spawn
     [SerializeField] float shootSpeed = 1f;
     public int bulletCount = 50;
     [SerializeField] float bulletLifetime = 4;
-    [SerializeField] GameObject bulletSlideHold;
+    [SerializeField] GameObject bulletSlideHold; //bullet ammount slider
     public int minBulletAdd = 10;
     public int maxBulletAdd = 15;
     Slider bulletSlider;

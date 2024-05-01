@@ -71,7 +71,10 @@ public class PlayerAttack : MonoBehaviour
             else if (TimerCD >= coolDown && CoolDownActive == true)
             {
                 Debug.Log("cooldown end");
-                arrowShow.enabled = true;
+                if(activeBow == true)
+                {
+                    arrowShow.enabled = true;
+                }
                 CoolDownActive = false;
                 justAttacked = false;
             }
