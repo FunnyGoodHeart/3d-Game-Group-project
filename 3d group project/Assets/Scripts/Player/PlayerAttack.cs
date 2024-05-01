@@ -16,6 +16,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] GameObject sword;
     [SerializeField] GameObject swordBox;
     [SerializeField] GameObject bow;
+    [SerializeField] GameObject arrow;
     [SerializeField] GameObject swordTransform;
     //ect
     PlayerBowShoot plBowShoots;
@@ -24,6 +25,7 @@ public class PlayerAttack : MonoBehaviour
     Transform swordPlacement;
     MeshRenderer swordShow;
     MeshRenderer bowShow;
+    MeshRenderer arrowShow;
     float coolDown = 2f;
     //sword bools
     bool justAttacked = false;
@@ -43,8 +45,10 @@ public class PlayerAttack : MonoBehaviour
         swordShow = sword.GetComponent<MeshRenderer>();
         swordPlacement = swordTransform.GetComponent<Transform>();
         bowShow = bow.GetComponent<MeshRenderer>();
+        arrowShow = arrow.GetComponent<MeshRenderer>();
         plBowShoots = bow.GetComponent<PlayerBowShoot>();
         bowShow.enabled = false;
+        arrowShow.enabled = false;
     }
 
     void Update()
@@ -67,6 +71,7 @@ public class PlayerAttack : MonoBehaviour
             else if (TimerCD >= coolDown && CoolDownActive == true)
             {
                 Debug.Log("cooldown end");
+                arrowShow.enabled = true;
                 CoolDownActive = false;
                 justAttacked = false;
             }
@@ -79,6 +84,7 @@ public class PlayerAttack : MonoBehaviour
             activeBow = false;
             activeSword = true;
             bowShow.enabled = false;
+            arrowShow.enabled = false;
             swordShow.enabled = true;
         }
     }
@@ -90,6 +96,7 @@ public class PlayerAttack : MonoBehaviour
             activeBow = true;
             swordShow.enabled = false;
             bowShow.enabled = true;
+            arrowShow.enabled = true;
         }
     }
     void OnAttack() 
@@ -112,6 +119,7 @@ public class PlayerAttack : MonoBehaviour
             {
                 Debug.Log("Pew");
                 bowAttack = true;
+                arrowShow.enabled = false;
                 justAttacked = true;
                 coolDown = bowCD;
             }
