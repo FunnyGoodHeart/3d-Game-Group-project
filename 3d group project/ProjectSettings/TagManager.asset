@@ -14,6 +14,8 @@ TagManager:
   - enemyBullet
   - InPlayerRange
   - BossEnemyAttack
+  - BulletBox
+  - THESKULL
   layers:
   - Default
   - TransparentFX
