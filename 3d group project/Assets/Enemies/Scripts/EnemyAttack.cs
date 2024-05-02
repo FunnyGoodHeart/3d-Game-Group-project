@@ -24,6 +24,7 @@ public class EnemyAttack : MonoBehaviour
     float timer = 0;
     Animator ani;
     [SerializeField] float shootDistance = 7;
+
     void Update()
     {
         if(rangedAttack == true)

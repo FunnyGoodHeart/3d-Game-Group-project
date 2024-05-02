@@ -39,6 +39,7 @@ public class EnemyMovement : MonoBehaviour
             {
                 gotHitTimer += Time.deltaTime;
                 Vector3 moveDir = player.transform.position - transform.position;
+                Vector3 closeHome = home - transform.position;
                 if (emyHealth.enemyGotHit == true && startChasing == false) //starts chaisng player and start chase timer
                 {
                     gotHitTimer = 0;
@@ -54,13 +55,16 @@ public class EnemyMovement : MonoBehaviour
                     agent.destination = player.transform.position;
                     ani.SetFloat("Speed", agent.destination.magnitude);
                 }
-                else //player too far away
+                else if(closeHome.magnitude > 1)
+                {
+                    agent.destination = home;
+                    //ani.SetFloat("Speed", agent.destination.magnitude);
+                }
+                else if(closeHome.magnitude < 1)//player too far away
                 {
                     Debug.Log("must of been the wind");
-                    agent.destination = home;
-                    ani.SetFloat("Speed", agent.destination.magnitude);
+                    ani.SetFloat("Speed", 0);
                 }
-                ani.SetFloat("Speed", agent.destination.magnitude);
             }
         }
         else if(stillEnemy == true)

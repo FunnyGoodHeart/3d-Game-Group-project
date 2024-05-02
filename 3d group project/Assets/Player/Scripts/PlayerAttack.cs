@@ -26,12 +26,16 @@ public class PlayerAttack : MonoBehaviour
     MeshRenderer swordShow;
     MeshRenderer bowShow;
     MeshRenderer arrowShow;
+    AmmoBoxInteractable bulletbox;
+    HardModeSkull theHARDMODE;
     float coolDown = 2f;
     //sword bools
     bool justAttacked = false;
     bool CoolDownActive = false;
     bool swordReset = false;
     bool activeSword = true;
+    bool nearBulletBox = false;
+    bool nearTHESKULL = false;
     //Bow bools
     bool activeBow = false;
     public bool bowAttack = false;
@@ -152,6 +156,40 @@ public class PlayerAttack : MonoBehaviour
                 plBowShoots.bulletCount = plBowShoots.maxBulletCount;
             }
             Destroy(other.gameObject);
+        }
+        if(other.gameObject.tag == "BulletBox")
+        {
+            GameObject bBox = other.gameObject;
+            bulletbox = bBox.GetComponentInParent<AmmoBoxInteractable>();
+            nearBulletBox = true;
+        }
+        if(other.gameObject.tag == "THESKULL")
+        {
+            GameObject skull = other.gameObject;
+            theHARDMODE = skull.GetComponentInParent<HardModeSkull>();
+            nearTHESKULL = true;
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.gameObject.tag == "BulletBox")
+        {
+            nearBulletBox = false;
+        }
+        if(other.gameObject.tag == "THESKULL")
+        {
+            nearTHESKULL = false;
+        }
+    }
+    void OnInteract()
+    {
+        if(nearBulletBox == true)
+        {
+            bulletbox.recharging = true;
+        }
+        else if (nearTHESKULL)
+        {
+            theHARDMODE.startTheFire = true;
         }
     }
 }
