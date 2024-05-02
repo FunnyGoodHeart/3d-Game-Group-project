@@ -52,12 +52,15 @@ public class EnemyMovement : MonoBehaviour
                 if (moveDir.magnitude < chaseDistance || startChasing == true) // if the player is close
                 {
                     agent.destination = player.transform.position;
+                    ani.SetFloat("Speed", agent.destination.magnitude);
                 }
                 else //player too far away
                 {
                     Debug.Log("must of been the wind");
                     agent.destination = home;
+                    ani.SetFloat("Speed", agent.destination.magnitude);
                 }
+                ani.SetFloat("Speed", agent.destination.magnitude);
             }
         }
         else if(stillEnemy == true)
