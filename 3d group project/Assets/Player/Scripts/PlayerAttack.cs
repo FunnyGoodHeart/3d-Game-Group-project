@@ -16,6 +16,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] GameObject sword;
     [SerializeField] GameObject swordBox;
     [SerializeField] GameObject bow;
+    [SerializeField] GameObject bowModle;
     [SerializeField] GameObject arrow;
     [SerializeField] GameObject swordTransform;
     //ect
@@ -48,7 +49,7 @@ public class PlayerAttack : MonoBehaviour
         swordBoxColl.enabled = false;
         swordShow = sword.GetComponent<MeshRenderer>();
         swordPlacement = swordTransform.GetComponent<Transform>();
-        bowShow = bow.GetComponent<MeshRenderer>();
+        bowShow = bowModle.GetComponent<MeshRenderer>();
         arrowShow = arrow.GetComponent<MeshRenderer>();
         plBowShoots = bow.GetComponent<PlayerBowShoot>();
         bowShow.enabled = false;
@@ -146,7 +147,8 @@ public class PlayerAttack : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "AmmoRegen" && plBowShoots.bulletCount < plBowShoots.maxBulletCount)
+        Debug.Log("inRange");
+        if (other.gameObject.tag == "AmmoRegen" && plBowShoots.maxBulletCount > plBowShoots.bulletCount)
         {
             Debug.Log("ammo collection");
             int bulletAdd = Random.Range(plBowShoots.minBulletAdd, plBowShoots.maxBulletCount);

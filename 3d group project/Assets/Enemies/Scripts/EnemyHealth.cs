@@ -12,9 +12,12 @@ public class EnemyHealth : MonoBehaviour
     public bool enemyGotHit = false; //if enemy gets hit by bullet & out of chase range
     Slider enemySlider;
     PlayerAttack PlAtk;
+    int maxEnemyHP;
     int chanceForHeal;
     int chanceForAmmo;
-    
+
+    HardModeSkull hardMode;
+    bool hardModeStarted = false;
     void Start()
     {
         PlAtk = Player.GetComponent<PlayerAttack>();
@@ -24,11 +27,23 @@ public class EnemyHealth : MonoBehaviour
         GetComponentInChildren<Canvas>().enabled = false;
         chanceForHeal = Random.Range(1, 6);
         chanceForAmmo = Random.Range(1, 6);
+        maxEnemyHP = enemyHP;
+
+        GameObject Skull = GameObject.Find("TheHardModeSkull");
+        hardMode = Skull.GetComponent<HardModeSkull>();
     }
 
     void Update()
     {
-        if(enemyHP <= 0)
+        if (hardMode.startTheFire == true && hardModeStarted == false)
+        {
+            enemyHP = maxEnemyHP;
+            enemyHP *= hardMode.timesDiffuculty;
+            enemySlider.maxValue = enemyHP;
+            enemySlider.value = enemyHP;
+            
+        }
+        if (enemyHP <= 0)
         {
             if(chanceForHeal == 1)
             {

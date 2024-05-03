@@ -25,8 +25,22 @@ public class EnemyAttack : MonoBehaviour
     Animator ani;
     [SerializeField] float shootDistance = 7;
 
+    HardModeSkull hardMode;
+    bool hardModeStarted = false;
+
+    private void Start()
+    {
+        GameObject Skull = GameObject.Find("TheHardModeSkull");
+        hardMode = Skull.GetComponent<HardModeSkull>();
+    }
     void Update()
     {
+        if(hardMode.startTheFire == true && hardModeStarted == false)
+        {
+            enemyPhysicalATK *= hardMode.timesDiffuculty;
+            bulletSpeed *= hardMode.timesDiffuculty;
+            hardModeStarted = true;
+        }
         if(rangedAttack == true)
         {
             timer += Time.deltaTime;

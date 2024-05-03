@@ -1856,7 +1856,8 @@ MonoBehaviour:
   atkTime: 0.5
   sword: {fileID: 2152413708532208136}
   swordBox: {fileID: 5537066967007946106}
-  bow: {fileID: 337944775445908333}
+  bow: {fileID: 287549393914561624}
+  bowModle: {fileID: 337944775445908333}
   arrow: {fileID: 8640876002483009817}
   swordTransform: {fileID: 4313818697497076675}
   bowAttack: 0
