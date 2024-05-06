@@ -5,6 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    public void Player()
+    {
+        SceneManager.LoadScene("Jungle");
+    }
     public void Quit()
     {
         Application.Quit();

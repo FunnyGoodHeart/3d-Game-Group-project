@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -10,20 +11,30 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] GameObject healthBarHold;
     [SerializeField] GameObject boss;
     [SerializeField] Canvas deathScreen;
+
+    [SerializeField] int emeraldCount = 0;
+    [SerializeField] int totalEmeraldsInGame = 4;
+    [SerializeField] GameObject emeraldCounterGO;
+
     Slider healthBar;
     int playerMaxHP;
     TikiTimBossFight tiki;
     GameObject emyHitBox;
     EnemyCloseAtk emyATK;
     EnemyAmmo emyAm;
+
+    TextMeshProUGUI emeraldCountTxt;
+    bool firstEmerald = true;
     private void Start()
     {
+        emeraldCountTxt = emeraldCounterGO.GetComponent<TextMeshProUGUI>();
         tiki = boss.GetComponent<TikiTimBossFight>();
         playerMaxHP = playerHP;
         healthBar = healthBarHold.GetComponent<Slider>();
         healthBar.maxValue = playerMaxHP;
         healthBar.value = playerHP;
         deathScreen.enabled = false;
+        emeraldCountTxt.enabled = false;
     }
     private void Update()
     {
@@ -69,6 +80,16 @@ public class PlayerHealth : MonoBehaviour
                 playerHP = playerMaxHP;
             }
             healthBar.value = playerHP;
+            Destroy(collison.gameObject);
+        }
+        if(collison.gameObject.tag == "Emerald")
+        {
+            emeraldCount += 1;
+            if (firstEmerald == true)
+            {
+                emeraldCountTxt.enabled = true;
+            }
+            emeraldCountTxt.text = "Emeralds Collected: " + emeraldCount + "/" + totalEmeraldsInGame;
             Destroy(collison.gameObject);
         }
     }
