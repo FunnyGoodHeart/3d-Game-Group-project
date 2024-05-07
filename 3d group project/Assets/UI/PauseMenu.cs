@@ -2,13 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField] Canvas pauseMenu;
+    //[SerializeField] GameObject player;
+    //PlayerInput pI;
 
     private void Start()
     {
+        //pI = player.GetComponent<PlayerInput>();
         pauseMenu.enabled = false;
     }
     void Update()
@@ -17,9 +21,11 @@ public class PauseMenu : MonoBehaviour
         {
             Time.timeScale = 0;
             pauseMenu.enabled = true;
+            //pI.enabled = false;
         }
         else if (Input.GetKeyDown(KeyCode.Escape) && Time.timeScale == 0)
         {
+            //pI.enabled = true;
             Resume();
         }
     }
