@@ -15,7 +15,7 @@ public class PlayerBowShoot : MonoBehaviour
     public int minBulletAdd = 10;
     public int maxBulletAdd = 15;
     Slider bulletSlider;
-    public int maxBulletCount = 50;
+    public int maxBulletCount ;
     PlayerAttack plAtk;
     void Start()
     {

@@ -45,7 +45,12 @@ public class TikiTimBossFight : MonoBehaviour
     bool cDActive = false;
     bool justHit = false;
     bool bossHealthShowing = false;
+    int maxBossHealth;
     float timer;
+
+    //hard mode
+    HardModeSkull hardMode;
+    bool hardModeStarted = false;
     void Start()
     {
         plAtk = player.GetComponent<PlayerAttack>();
@@ -62,16 +67,32 @@ public class TikiTimBossFight : MonoBehaviour
         backGroundSlider = backGroundPart.GetComponent<Image>();
         fillSlider = fillPart.GetComponent<Image>();
         bossHealthText = bossText.GetComponent<TextMeshProUGUI>();
+
+        maxBossHealth = bossHealth;
         boosHealthSlider.maxValue = bossHealth;
         boosHealthSlider.value = bossHealth;
         backGroundSlider.enabled = false;
         fillSlider.enabled = false;
         bossHealthText.enabled = false;
+
+        GameObject Skull = GameObject.Find("TheHardModeSkull");
+        hardMode = Skull.GetComponent<HardModeSkull>();
     }
 
     void Update()
     {
-        Debug.Log(isAttacking);
+        if (hardMode.startTheFire == true && hardModeStarted == false)
+        {
+            maxBossHealth *= hardMode.timesDiffuculty;
+            bossHealth = maxBossHealth;
+            boosHealthSlider.maxValue = maxBossHealth;
+            boosHealthSlider.value = bossHealth;
+            bossDmg *= hardMode.timesDiffuculty;
+            bossHitCoolDown -= 1;
+            agent.speed += 2;
+            hardModeStarted = true;
+        }
+            Debug.Log(isAttacking);
         timer += Time.deltaTime;
         if (justHit == true && cDActive == false)
         {
