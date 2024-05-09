@@ -29,6 +29,7 @@ public class PlayerAttack : MonoBehaviour
     MeshRenderer arrowShow;
     AmmoBoxInteractable bulletbox;
     HardModeSkull theHARDMODE;
+    PinappleInteracr PineInter;
     float coolDown = 2f;
     //sword bools
     bool justAttacked = false;
@@ -37,6 +38,7 @@ public class PlayerAttack : MonoBehaviour
     bool activeSword = true;
     bool nearBulletBox = false;
     bool nearTHESKULL = false;
+    bool nearPineapple = false;
     //Bow bools
     bool activeBow = false;
     public bool bowAttack = false;
@@ -171,9 +173,19 @@ public class PlayerAttack : MonoBehaviour
             theHARDMODE = skull.GetComponentInParent<HardModeSkull>();
             nearTHESKULL = true;
         }
+        if(other.gameObject.tag == "PineappleHeal")
+        {
+            GameObject PineappleObj = other.gameObject;
+            PineInter = PineappleObj.GetComponent<PinappleInteracr>();
+            nearPineapple = true;
+        }
     }
     private void OnTriggerExit(Collider other)
     {
+        if(other.gameObject.tag == "PineappleHeal")
+        {
+            nearPineapple = false;
+        }
         if(other.gameObject.tag == "BulletBox")
         {
             nearBulletBox = false;
@@ -185,13 +197,17 @@ public class PlayerAttack : MonoBehaviour
     }
     void OnInteract()
     {
-        if(nearBulletBox == true)
+        if(nearBulletBox == true && bulletbox.recharging == false)
         {
             bulletbox.recharging = true;
         }
-        else if (nearTHESKULL)
+        else if (nearTHESKULL && theHARDMODE.startTheFire == false)
         {
             theHARDMODE.startTheFire = true;
+        }
+        else if (nearPineapple && PineInter.pineRecharging == false)
+        {
+            PineInter.pineRecharging = true;
         }
     }
 }

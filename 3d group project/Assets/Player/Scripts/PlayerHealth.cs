@@ -17,7 +17,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] GameObject emeraldCounterGO;
 
     Slider healthBar;
-    int playerMaxHP;
+    public int playerMaxHP;
     TikiTimBossFight tiki;
     GameObject emyHitBox;
     EnemyCloseAtk emyATK;
@@ -38,7 +38,8 @@ public class PlayerHealth : MonoBehaviour
     }
     private void Update()
     {
-        if(playerHP <= 0)
+        healthBar.value = playerHP;
+        if (playerHP <= 0)
         {
             deathScreen.enabled = true;
         }
