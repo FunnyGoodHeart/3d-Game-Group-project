@@ -6,7 +6,7 @@ using TMPro;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [SerializeField] int playerHP = 50;
+    public int playerHP = 50;
     [SerializeField] int healAmmount = 10;
     [SerializeField] GameObject healthBarHold;
     [SerializeField] GameObject boss;
