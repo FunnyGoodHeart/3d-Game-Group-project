@@ -18,6 +18,7 @@ TagManager:
   - THESKULL
   - Emerald
   - PineappleHeal
+  - Campfire
   layers:
   - Default
   - TransparentFX

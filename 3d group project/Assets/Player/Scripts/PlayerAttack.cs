@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] GameObject bowModle;
     [SerializeField] GameObject arrow;
     [SerializeField] GameObject swordTransform;
+    [SerializeField] TextMeshProUGUI interact;
     //ect
     PlayerBowShoot plBowShoots;
     BoxCollider swordBoxColl;
@@ -56,6 +58,7 @@ public class PlayerAttack : MonoBehaviour
         plBowShoots = bow.GetComponent<PlayerBowShoot>();
         bowShow.enabled = false;
         arrowShow.enabled = false;
+        interact.enabled = false;
     }
 
     void Update()
@@ -165,18 +168,33 @@ public class PlayerAttack : MonoBehaviour
         {
             GameObject bBox = other.gameObject;
             bulletbox = bBox.GetComponentInParent<AmmoBoxInteractable>();
+            if(bulletbox.recharging == false)
+            {
+                interact.enabled = true;
+                interact.text = "Press E To Arrow";
+            }
             nearBulletBox = true;
         }
         if(other.gameObject.tag == "THESKULL")
         {
             GameObject skull = other.gameObject;
             theHARDMODE = skull.GetComponentInParent<HardModeSkull>();
+            if(theHARDMODE.startTheFire == false)
+            {
+                interact.enabled = true;
+                interact.text = "Press E To Hard Mode";
+            }
             nearTHESKULL = true;
         }
         if(other.gameObject.tag == "PineappleHeal")
         {
             GameObject PineappleObj = other.gameObject;
             PineInter = PineappleObj.GetComponent<PinappleInteracr>();
+            if (PineInter.pineRecharging == false)
+            {
+                interact.enabled = true;
+                interact.text = "Press E To Pineapple";
+            }
             nearPineapple = true;
         }
     }
@@ -185,14 +203,18 @@ public class PlayerAttack : MonoBehaviour
         if(other.gameObject.tag == "PineappleHeal")
         {
             nearPineapple = false;
+            
+            interact.enabled = false;
         }
         if(other.gameObject.tag == "BulletBox")
         {
             nearBulletBox = false;
+            interact.enabled = false;
         }
         if(other.gameObject.tag == "THESKULL")
         {
             nearTHESKULL = false;
+            interact.enabled = false;
         }
     }
     void OnInteract()
@@ -200,14 +222,17 @@ public class PlayerAttack : MonoBehaviour
         if(nearBulletBox == true && bulletbox.recharging == false)
         {
             bulletbox.recharging = true;
+            interact.enabled = false;
         }
         else if (nearTHESKULL && theHARDMODE.startTheFire == false)
         {
             theHARDMODE.startTheFire = true;
+            interact.enabled = false;
         }
         else if (nearPineapple && PineInter.pineRecharging == false)
         {
             PineInter.pineRecharging = true;
+            interact.enabled = false;
         }
     }
 }
