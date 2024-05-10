@@ -8,10 +8,9 @@ public class SaveSystem : MonoBehaviour
     private static string keyWord = "123456789";
     //press key saved data
     //press another key, load data
-    
+
     void Start()
     {
-        
     }
 
     void Update()
@@ -29,7 +28,7 @@ public class SaveSystem : MonoBehaviour
     {
         //if want different save do : Save (string saveState)
         //save data
-        SaveData myData = new SaveData();
+        SaveDataTest myData = new SaveDataTest();
         myData.x = transform.position.x;
         myData.y = transform.position.y;
         myData.z = transform.position.z;
@@ -48,7 +47,7 @@ public class SaveSystem : MonoBehaviour
         {
             var jsonData = File.ReadAllText(file);
             jsonData = EncryptDecryptData(jsonData);
-            SaveData myData = JsonUtility.FromJson<SaveData>(jsonData);
+            SaveDataTest myData = JsonUtility.FromJson<SaveDataTest>(jsonData);
             transform.position = new Vector3(myData.x, myData.y, myData.z);
         }
     }
@@ -65,7 +64,7 @@ public class SaveSystem : MonoBehaviour
     }
 }
 [System.Serializable]
-public class SaveData
+public class SaveDataTest
 {
     public float x;
     public float y;

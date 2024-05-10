@@ -15,6 +15,7 @@ public class EnemyHealth : MonoBehaviour
     int maxEnemyHP;
     int chanceForHeal;
     int chanceForAmmo;
+    int bowAtk;
 
     HardModeSkull hardMode;
     bool hardModeStarted = false;

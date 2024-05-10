@@ -7,8 +7,8 @@ using TMPro;
 public class PlayerAttack : MonoBehaviour
 {
     [Header("Numbers")]
-    [SerializeField] public int playerSwordATK = 10;
-    [SerializeField] public int playerBowATK = 5;
+    public int playerSwordATK = 10;
+    public int playerBowATK = 5;
     [SerializeField] float swordCD = 2f;
     [SerializeField] float bowCD = 1f;
     [SerializeField] float atkTime = 0.5f;
