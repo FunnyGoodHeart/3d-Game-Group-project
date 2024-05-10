@@ -3336,6 +3336,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6146241456392523623, guid: b1468c9fc8a070e41bc7ab2af6b872fb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7581249597060197086, guid: b1468c9fc8a070e41bc7ab2af6b872fb, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -3352,6 +3356,10 @@ PrefabInstance:
       propertyPath: boss
       value: 
       objectReference: {fileID: 1316157074}
+    - target: {fileID: 8786747523759990734, guid: b1468c9fc8a070e41bc7ab2af6b872fb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

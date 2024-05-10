@@ -12,7 +12,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] GameObject boss;
     [SerializeField] Canvas deathScreen;
 
-    [SerializeField] int emeraldCount = 0;
+    public int emeraldCount = 0;
     [SerializeField] int totalEmeraldsInGame = 4;
     [SerializeField] GameObject emeraldCounterGO;
 
