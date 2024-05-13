@@ -7,6 +7,9 @@ using UnityEngine.InputSystem;
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField] Canvas pauseMenu;
+    [SerializeField] Canvas saveMenu;
+    [SerializeField] Canvas loadMenu;
+    [SerializeField] Canvas saveOrLoad;
     //[SerializeField] GameObject player;
     //PlayerInput pI;
 
@@ -14,6 +17,9 @@ public class PauseMenu : MonoBehaviour
     {
         //pI = player.GetComponent<PlayerInput>();
         pauseMenu.enabled = false;
+        saveMenu.enabled = false;
+        loadMenu.enabled = false;
+        saveOrLoad.enabled = false;
     }
     void Update()
     {

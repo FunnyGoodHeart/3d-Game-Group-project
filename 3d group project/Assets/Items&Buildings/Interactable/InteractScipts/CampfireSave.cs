@@ -5,10 +5,12 @@ using UnityEngine;
 
 public class CampfireSave : MonoBehaviour
 {
-    private static string keyWord = "123456789";
+    private static string keyWord = "7555299933777";
     public bool CampSaveActivate = false;
     public int EmeraldCountNumber = 0000;
     [SerializeField] Canvas saveMenu;
+    [SerializeField] Canvas loadMenu;
+    [SerializeField] Canvas saveOrLoad;
     [SerializeField] GameObject emySSGO;
     [SerializeField] GameObject player;
     PlayerBowShoot plyBoSh;
@@ -16,7 +18,6 @@ public class CampfireSave : MonoBehaviour
     EnemySaveSlotScript emySS;
     void Start()
     {
-        saveMenu.enabled = false;
         emySS = emySSGO.GetComponent<EnemySaveSlotScript>();
         plyHelth = player.GetComponent<PlayerHealth>();
         plyBoSh = player.GetComponent<PlayerBowShoot>();
@@ -36,11 +37,35 @@ public class CampfireSave : MonoBehaviour
         {
             result += (char)(data[i] ^ keyWord[i % keyWord.Length]);
         }
-
-
         return result;
     }
+    public void SavingAData()
+    {
+        saveOrLoad.enabled = false;
+        saveMenu.enabled = true;
+    }
+    public void LoadingAData()
+    {
+        saveOrLoad.enabled = false;
+        loadMenu.enabled = true;
+    }
     public void SaveSlot1()
+    {
+        SavingData("SaveSlot1");
+    }
+    public void SaveSlot2()
+    {
+        SavingData("SaveSlot2");
+    }
+    public void SaveSlot3()
+    {
+        SavingData("SaveSlot3");
+    }
+    public void SaveSlot4()
+    {
+        SavingData("SaveSlot4");
+    }
+    public void SavingData(string SaveSlotName)
     {
         emySS.sSAEmy1 = true;
         PlayerSavedData myData = new PlayerSavedData();
@@ -53,10 +78,43 @@ public class CampfireSave : MonoBehaviour
         myData.plyEmCollectSV = EmeraldCountNumber;
         string myDataString = JsonUtility.ToJson(myData);
         //Debug.Log(Application.persistentDataPath);
-        string file = Application.persistentDataPath + "/" + gameObject.name + "SaveSlot1" +".jaon"; // between / & gameobject.name put saveState
+        string file = Application.persistentDataPath + "/" + gameObject.name + SaveSlotName + ".jaon"; // between / & gameobject.name put saveState
         myDataString = EncryptDecryptData(myDataString);
         System.IO.File.WriteAllText(file, myDataString);
+        saveMenu.enabled = false;
         Debug.Log("Saving");
+    }
+    public void LoadSlot1()
+    {
+        LoadingData("SaveSlot1");
+    }
+    public void LoadSlot2()
+    {
+        LoadingData("SaveSlot2");
+    }
+    public void LoadSlot3()
+    {
+        LoadingData("SaveSlot3");
+    }
+    public void LoadSlot4()
+    {
+        LoadingData("SaveSlot4");
+    }
+    public void LoadingData(string SaveSlotName)
+    {
+        string file = Application.persistentDataPath + "/" + gameObject.name + SaveSlotName + ".jaon";
+        if (File.Exists(file))
+        {
+            var jsonData = File.ReadAllText(file);
+            jsonData = EncryptDecryptData(jsonData);
+            PlayerSavedData myData = JsonUtility.FromJson<PlayerSavedData>(jsonData);
+            transform.position = new Vector3(myData.PlyLocationX, myData.PlyLocationY, myData.PlyLocationZ);
+            plyHelth.playerHP = myData.plyHealthSV;
+            plyBoSh.bulletCount = myData.plyAmmoSV;
+            plyHelth.emeraldCount = myData.plyEmeraldSV;
+            EmeraldCountNumber = myData.plyEmCollectSV;
+            loadMenu.enabled = true;
+        }
     }
 }
 

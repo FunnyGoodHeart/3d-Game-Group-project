@@ -21,6 +21,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] GameObject arrow;
     [SerializeField] GameObject swordTransform;
     [SerializeField] TextMeshProUGUI interact;
+    [SerializeField] Canvas saveOrLoad;
     //ect
     PlayerBowShoot plBowShoots;
     BoxCollider swordBoxColl;
@@ -41,6 +42,7 @@ public class PlayerAttack : MonoBehaviour
     bool nearBulletBox = false;
     bool nearTHESKULL = false;
     bool nearPineapple = false;
+    bool nearCampfire = false;
     //Bow bools
     bool activeBow = false;
     public bool bowAttack = false;
@@ -197,6 +199,10 @@ public class PlayerAttack : MonoBehaviour
             }
             nearPineapple = true;
         }
+        if(other.gameObject.tag == "Campfire")
+        {
+            nearCampfire = true;
+        }
     }
     private void OnTriggerExit(Collider other)
     {
@@ -216,6 +222,10 @@ public class PlayerAttack : MonoBehaviour
             nearTHESKULL = false;
             interact.enabled = false;
         }
+        if(other.gameObject.tag == "Campfire")
+        {
+            nearCampfire = false;
+        }
     }
     void OnInteract()
     {
@@ -233,6 +243,10 @@ public class PlayerAttack : MonoBehaviour
         {
             PineInter.pineRecharging = true;
             interact.enabled = false;
+        }
+        else if (nearCampfire)
+        {
+            saveOrLoad.enabled = true;
         }
     }
 }
