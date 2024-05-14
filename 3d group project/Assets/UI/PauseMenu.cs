@@ -7,9 +7,7 @@ using UnityEngine.InputSystem;
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField] Canvas pauseMenu;
-    bool isCursorLocked = false;
-    //[SerializeField] GameObject player;
-    //PlayerInput pI;
+    public bool lockCursor = true;
 
     private void Start()
     {
@@ -21,13 +19,12 @@ public class PauseMenu : MonoBehaviour
         {
             Time.timeScale = 0;
             pauseMenu.enabled = true;
-            cursorSwitch();
+            CursorChange();
             //pI.enabled = false;
         }
         else if (Input.GetKeyDown(KeyCode.Escape) && Time.timeScale == 0)
         {
             //pI.enabled = true;
-            cursorSwitch();
             Resume();
         }
     }
@@ -35,7 +32,7 @@ public class PauseMenu : MonoBehaviour
     {
         Time.timeScale = 1;
         pauseMenu.enabled = false;
-        cursorSwitch();
+        CursorChange();
     }
     public void ExitGame()
     {
@@ -53,9 +50,10 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 0;
         pauseMenu.enabled = true;
     }
-    public void cursorSwitch()
+    public void CursorChange()
     {
-        Cursor.lockState = isCursorLocked ? CursorLockMode.Locked : CursorLockMode.None;
-        Cursor.visible = !isCursorLocked;
+        lockCursor = !lockCursor;
+        Cursor.lockState = lockCursor ? CursorLockMode.Locked : CursorLockMode.None;
+        Cursor.visible = !lockCursor;
     }
 }

@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class LockedCursor : MonoBehaviour
 {
-    public bool isCursorLocked = false;
-
+        public bool lockCursor = true;
     void Update()
     {
-        //Cursor key toggle
+
+        // pressing esc toggles between hide/show
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Cursor.lockState = isCursorLocked ? CursorLockMode.Locked : CursorLockMode.None;
-            Cursor.visible = !isCursorLocked;
+            lockCursor = !lockCursor;
         }
+
+        Cursor.lockState = lockCursor ? CursorLockMode.Locked : CursorLockMode.None;
+        Cursor.visible = !lockCursor;
     }
 }

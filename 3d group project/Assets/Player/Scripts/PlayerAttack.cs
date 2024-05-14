@@ -20,6 +20,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] GameObject bowModle;
     [SerializeField] GameObject arrow;
     [SerializeField] GameObject swordTransform;
+    [SerializeField] GameObject campfire;
     [SerializeField] TextMeshProUGUI interact;
     [SerializeField] Canvas saveOrLoad;
     //ect
@@ -33,6 +34,7 @@ public class PlayerAttack : MonoBehaviour
     AmmoBoxInteractable bulletbox;
     HardModeSkull theHARDMODE;
     PinappleInteracr PineInter;
+    CampfireSave campSave;
     float coolDown = 2f;
     //sword bools
     bool justAttacked = false;
@@ -58,6 +60,7 @@ public class PlayerAttack : MonoBehaviour
         bowShow = bowModle.GetComponent<MeshRenderer>();
         arrowShow = arrow.GetComponent<MeshRenderer>();
         plBowShoots = bow.GetComponent<PlayerBowShoot>();
+        campSave = campfire.GetComponent<CampfireSave>();
         bowShow.enabled = false;
         arrowShow.enabled = false;
         interact.enabled = false;
@@ -246,6 +249,7 @@ public class PlayerAttack : MonoBehaviour
         }
         else if (nearCampfire)
         {
+            campSave.CampSaveActivate = true;
             saveOrLoad.enabled = true;
         }
     }
