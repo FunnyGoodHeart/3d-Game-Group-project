@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class EnemyHealth : MonoBehaviour
 {
-    [SerializeField] int enemyHP = 10;
+    public int enemyHP = 10;
     [SerializeField] GameObject Player;
     [SerializeField] GameObject healItem;
     [SerializeField] GameObject bulletItem;
