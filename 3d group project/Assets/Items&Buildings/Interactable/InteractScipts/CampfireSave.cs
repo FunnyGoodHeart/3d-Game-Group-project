@@ -18,6 +18,9 @@ public class CampfireSave : MonoBehaviour
     EnemySaveSlotScript emySS;
     void Start()
     {
+        saveMenu.enabled = false;
+        loadMenu.enabled = false;
+        saveOrLoad.enabled = false;
         emySS = emySSGO.GetComponent<EnemySaveSlotScript>();
         plyHelth = player.GetComponent<PlayerHealth>();
         plyBoSh = player.GetComponent<PlayerBowShoot>();
@@ -27,7 +30,8 @@ public class CampfireSave : MonoBehaviour
     {
         if (CampSaveActivate)
         {
-            saveMenu.enabled = true;
+            saveOrLoad.enabled = true;
+            CampSaveActivate = false;
         }
     }
     public string EncryptDecryptData(string data)
@@ -113,7 +117,7 @@ public class CampfireSave : MonoBehaviour
             plyBoSh.bulletCount = myData.plyAmmoSV;
             plyHelth.emeraldCount = myData.plyEmeraldSV;
             EmeraldCountNumber = myData.plyEmCollectSV;
-            loadMenu.enabled = true;
+            loadMenu.enabled = false;
         }
     }
 }
