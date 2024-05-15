@@ -46,7 +46,7 @@ public class EnemyHealth : MonoBehaviour
             enemyHP *= hardMode.timesDiffuculty;
             enemySlider.maxValue = enemyHP;
             enemySlider.value = enemyHP;
-            
+            hardModeStarted = true;
         }
         if (enemyHP <= 0)
         {
@@ -59,7 +59,7 @@ public class EnemyHealth : MonoBehaviour
                 GameObject item = Instantiate(bulletItem, transform.position, Quaternion.identity);
             }
             Emymove.enabled = false;
-            
+            charactermovement.position = new Vector3(0, 0, 0);
         }
     }
     private void OnTriggerEnter(Collider collision)
