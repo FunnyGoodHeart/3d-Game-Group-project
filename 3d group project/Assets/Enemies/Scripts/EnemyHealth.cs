@@ -12,6 +12,9 @@ public class EnemyHealth : MonoBehaviour
     public bool enemyGotHit = false; //if enemy gets hit by bullet & out of chase range
     Slider enemySlider;
     PlayerAttack PlAtk;
+    EnemyMovement Emymove;
+    Transform charactermovement;
+    
     int maxEnemyHP;
     int chanceForHeal;
     int chanceForAmmo;
@@ -21,6 +24,7 @@ public class EnemyHealth : MonoBehaviour
     bool hardModeStarted = false;
     void Start()
     {
+        charactermovement = GetComponent<Transform>();
         PlAtk = Player.GetComponent<PlayerAttack>();
         enemySlider = GetComponentInChildren<Slider>();
         enemySlider.maxValue = enemyHP;
@@ -54,7 +58,8 @@ public class EnemyHealth : MonoBehaviour
             {
                 GameObject item = Instantiate(bulletItem, transform.position, Quaternion.identity);
             }
-            Destroy(gameObject);
+            Emymove.enabled = false;
+            
         }
     }
     private void OnTriggerEnter(Collider collision)

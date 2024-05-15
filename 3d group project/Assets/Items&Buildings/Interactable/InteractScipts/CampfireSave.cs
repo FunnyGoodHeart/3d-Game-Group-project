@@ -13,24 +13,28 @@ public class CampfireSave : MonoBehaviour
     [SerializeField] Canvas saveOrLoad;
     [SerializeField] GameObject emySSGO;
     [SerializeField] GameObject player;
+    [SerializeField] GameObject bow;
+    [SerializeField] GameObject pauseMenu;
+    PauseMenu PM;
     PlayerBowShoot plyBoSh;
     PlayerHealth plyHelth;
     EnemySaveSlotScript emySS;
     void Start()
     {
+        PM = pauseMenu.GetComponent<PauseMenu>();
         saveMenu.enabled = false;
         loadMenu.enabled = false;
         saveOrLoad.enabled = false;
         emySS = emySSGO.GetComponent<EnemySaveSlotScript>();
         plyHelth = player.GetComponent<PlayerHealth>();
-        plyBoSh = player.GetComponent<PlayerBowShoot>();
+        plyBoSh = bow.GetComponent<PlayerBowShoot>();
     }
 
     void Update()
     {
         if (CampSaveActivate)
         {
-            saveOrLoad.enabled = true;
+            PM.CursorChange();
             CampSaveActivate = false;
         }
     }
@@ -55,22 +59,6 @@ public class CampfireSave : MonoBehaviour
     }
     public void SaveSlot1()
     {
-        SavingData("SaveSlot1");
-    }
-    public void SaveSlot2()
-    {
-        SavingData("SaveSlot2");
-    }
-    public void SaveSlot3()
-    {
-        SavingData("SaveSlot3");
-    }
-    public void SaveSlot4()
-    {
-        SavingData("SaveSlot4");
-    }
-    public void SavingData(string SaveSlotName)
-    {
         emySS.sSAEmy1 = true;
         PlayerSavedData myData = new PlayerSavedData();
         myData.PlyLocationX = transform.position.x;
@@ -81,34 +69,80 @@ public class CampfireSave : MonoBehaviour
         myData.plyEmeraldSV = plyHelth.emeraldCount;
         myData.plyEmCollectSV = EmeraldCountNumber;
         string myDataString = JsonUtility.ToJson(myData);
-        //Debug.Log(Application.persistentDataPath);
-        string file = Application.persistentDataPath + "/" + gameObject.name + SaveSlotName + ".jaon"; // between / & gameobject.name put saveState
+        Debug.Log(Application.persistentDataPath);
+        string file = Application.persistentDataPath + "/" + gameObject.name + "SS1" + ".jaon";
         myDataString = EncryptDecryptData(myDataString);
         System.IO.File.WriteAllText(file, myDataString);
         saveMenu.enabled = false;
+        PM.CursorChange();
+        Debug.Log("Saving");
+    }
+    public void SaveSlot2()
+    {
+        emySS.sSAEmy2 = true;
+        PlayerSavedData myData = new PlayerSavedData();
+        myData.PlyLocationX = transform.position.x;
+        myData.PlyLocationY = transform.position.y;
+        myData.PlyLocationZ = transform.position.z;
+        myData.plyHealthSV = plyHelth.playerHP;
+        myData.plyAmmoSV = plyBoSh.bulletCount;
+        myData.plyEmeraldSV = plyHelth.emeraldCount;
+        myData.plyEmCollectSV = EmeraldCountNumber;
+        string myDataString = JsonUtility.ToJson(myData);
+        Debug.Log(Application.persistentDataPath);
+        string file = Application.persistentDataPath + "/" + gameObject.name + "SS2" + ".jaon";
+        myDataString = EncryptDecryptData(myDataString);
+        System.IO.File.WriteAllText(file, myDataString);
+        saveMenu.enabled = false;
+        PM.CursorChange();
+        Debug.Log("Saving");
+    }
+    public void SaveSlot3()
+    {
+        emySS.sSAEmy3 = true;
+        PlayerSavedData myData = new PlayerSavedData();
+        myData.PlyLocationX = transform.position.x;
+        myData.PlyLocationY = transform.position.y;
+        myData.PlyLocationZ = transform.position.z;
+        myData.plyHealthSV = plyHelth.playerHP;
+        myData.plyAmmoSV = plyBoSh.bulletCount;
+        myData.plyEmeraldSV = plyHelth.emeraldCount;
+        myData.plyEmCollectSV = EmeraldCountNumber;
+        string myDataString = JsonUtility.ToJson(myData);
+        Debug.Log(Application.persistentDataPath);
+        string file = Application.persistentDataPath + "/" + gameObject.name + "SS3" + ".jaon";
+        myDataString = EncryptDecryptData(myDataString);
+        System.IO.File.WriteAllText(file, myDataString);
+        saveMenu.enabled = false;
+        PM.CursorChange();
+        Debug.Log("Saving");
+    }
+    public void SaveSlot4()
+    {
+        emySS.sSAEmy4 = true;
+        PlayerSavedData myData = new PlayerSavedData();
+        myData.PlyLocationX = transform.position.x;
+        myData.PlyLocationY = transform.position.y;
+        myData.PlyLocationZ = transform.position.z;
+        myData.plyHealthSV = plyHelth.playerHP;
+        myData.plyAmmoSV = plyBoSh.bulletCount;
+        myData.plyEmeraldSV = plyHelth.emeraldCount;
+        myData.plyEmCollectSV = EmeraldCountNumber;
+        string myDataString = JsonUtility.ToJson(myData);
+        Debug.Log(Application.persistentDataPath);
+        string file = Application.persistentDataPath + "/" + gameObject.name + "SS4" + ".jaon";
+        myDataString = EncryptDecryptData(myDataString);
+        System.IO.File.WriteAllText(file, myDataString);
+        saveMenu.enabled = false;
+        PM.CursorChange();
         Debug.Log("Saving");
     }
     public void LoadSlot1()
     {
-        LoadingData("SaveSlot1");
-    }
-    public void LoadSlot2()
-    {
-        LoadingData("SaveSlot2");
-    }
-    public void LoadSlot3()
-    {
-        LoadingData("SaveSlot3");
-    }
-    public void LoadSlot4()
-    {
-        LoadingData("SaveSlot4");
-    }
-    public void LoadingData(string SaveSlotName)
-    {
-        string file = Application.persistentDataPath + "/" + gameObject.name + SaveSlotName + ".jaon";
+        string file = Application.persistentDataPath + "/" + gameObject.name + "SS1" + ".jaon";
         if (File.Exists(file))
         {
+            emySS.lSAEmy1 = true;
             var jsonData = File.ReadAllText(file);
             jsonData = EncryptDecryptData(jsonData);
             PlayerSavedData myData = JsonUtility.FromJson<PlayerSavedData>(jsonData);
@@ -117,6 +151,61 @@ public class CampfireSave : MonoBehaviour
             plyBoSh.bulletCount = myData.plyAmmoSV;
             plyHelth.emeraldCount = myData.plyEmeraldSV;
             EmeraldCountNumber = myData.plyEmCollectSV;
+            PM.CursorChange();
+            loadMenu.enabled = false;
+        }
+    }
+    public void LoadSlot2()
+    {
+        string file = Application.persistentDataPath + "/" + gameObject.name + "SS2" + ".jaon";
+        if (File.Exists(file))
+        {
+            emySS.lSAEmy2 = true;
+            var jsonData = File.ReadAllText(file);
+            jsonData = EncryptDecryptData(jsonData);
+            PlayerSavedData myData = JsonUtility.FromJson<PlayerSavedData>(jsonData);
+            transform.position = new Vector3(myData.PlyLocationX, myData.PlyLocationY, myData.PlyLocationZ);
+            plyHelth.playerHP = myData.plyHealthSV;
+            plyBoSh.bulletCount = myData.plyAmmoSV;
+            plyHelth.emeraldCount = myData.plyEmeraldSV;
+            EmeraldCountNumber = myData.plyEmCollectSV;
+            PM.CursorChange();
+            loadMenu.enabled = false;
+        }
+    }
+    public void LoadSlot3()
+    {
+        string file = Application.persistentDataPath + "/" + gameObject.name + "SS3" + ".jaon";
+        if (File.Exists(file))
+        {
+            emySS.lSAEmy3 = true;
+            var jsonData = File.ReadAllText(file);
+            jsonData = EncryptDecryptData(jsonData);
+            PlayerSavedData myData = JsonUtility.FromJson<PlayerSavedData>(jsonData);
+            transform.position = new Vector3(myData.PlyLocationX, myData.PlyLocationY, myData.PlyLocationZ);
+            plyHelth.playerHP = myData.plyHealthSV;
+            plyBoSh.bulletCount = myData.plyAmmoSV;
+            plyHelth.emeraldCount = myData.plyEmeraldSV;
+            EmeraldCountNumber = myData.plyEmCollectSV;
+            PM.CursorChange();
+            loadMenu.enabled = false;
+        }
+    }
+    public void LoadSlot4()
+    {
+        string file = Application.persistentDataPath + "/" + gameObject.name + "SS4" + ".jaon";
+        if (File.Exists(file))
+        {
+            emySS.lSAEmy4 = true;
+            var jsonData = File.ReadAllText(file);
+            jsonData = EncryptDecryptData(jsonData);
+            PlayerSavedData myData = JsonUtility.FromJson<PlayerSavedData>(jsonData);
+            transform.position = new Vector3(myData.PlyLocationX, myData.PlyLocationY, myData.PlyLocationZ);
+            plyHelth.playerHP = myData.plyHealthSV;
+            plyBoSh.bulletCount = myData.plyAmmoSV;
+            plyHelth.emeraldCount = myData.plyEmeraldSV;
+            EmeraldCountNumber = myData.plyEmCollectSV;
+            PM.CursorChange();
             loadMenu.enabled = false;
         }
     }

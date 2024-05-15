@@ -26,41 +26,88 @@ public class enemySaving : MonoBehaviour
     {
         if (EmySS.sSAEmy1)
         {
-            EnemySaving("SaveSlot1");
+            EnemySavedData emyData = new EnemySavedData();
+            emyData.EnemyHealth = emyHealth.enemyHP;
+            string emyDataString = JsonUtility.ToJson(emyData);
+            //Debug.Log(Application.persistentDataPath);
+            string file = Application.persistentDataPath + "/" + gameObject.name + "SS1" + ".jaon"; // between / & gameobject.name put saveState
+            emyDataString = EncryptDecryptData(emyDataString);
+            System.IO.File.WriteAllText(file, emyDataString);
         }
         else if (EmySS.sSAEmy2)
         {
-            EnemySaving("SaveSlot2");
+            EnemySavedData emyData = new EnemySavedData();
+            emyData.EnemyHealth = emyHealth.enemyHP;
+            string emyDataString = JsonUtility.ToJson(emyData);
+            //Debug.Log(Application.persistentDataPath);
+            string file = Application.persistentDataPath + "/" + gameObject.name + "SS2" + ".jaon"; // between / & gameobject.name put saveState
+            emyDataString = EncryptDecryptData(emyDataString);
+            System.IO.File.WriteAllText(file, emyDataString);
         }
         else if (EmySS.sSAEmy3)
         {
-            EnemySaving("SaveSlot3");
+            EnemySavedData emyData = new EnemySavedData();
+            emyData.EnemyHealth = emyHealth.enemyHP;
+            string emyDataString = JsonUtility.ToJson(emyData);
+            //Debug.Log(Application.persistentDataPath);
+            string file = Application.persistentDataPath + "/" + gameObject.name + "SS3" + ".jaon"; // between / & gameobject.name put saveState
+            emyDataString = EncryptDecryptData(emyDataString);
+            System.IO.File.WriteAllText(file, emyDataString);
         }
         else if (EmySS.sSAEmy4)
         {
-            EnemySaving("SaveSlot4");
+            EnemySavedData emyData = new EnemySavedData();
+            emyData.EnemyHealth = emyHealth.enemyHP;
+            string emyDataString = JsonUtility.ToJson(emyData);
+            //Debug.Log(Application.persistentDataPath);
+            string file = Application.persistentDataPath + "/" + gameObject.name + "SS4" + ".jaon"; // between / & gameobject.name put saveState
+            emyDataString = EncryptDecryptData(emyDataString);
+            System.IO.File.WriteAllText(file, emyDataString);
         }
-    }
-    public void EnemyLoading(string SaveSlotName)
-    {
-        string file = Application.persistentDataPath + "/" + gameObject.name + SaveSlotName + ".jaon";
-        if (File.Exists(file))
+        else if (EmySS.lSAEmy1)
         {
-            var jsonData = File.ReadAllText(file);
-            jsonData = EncryptDecryptData(jsonData);
-            EnemySavedData enemyData = JsonUtility.FromJson<EnemySavedData>(jsonData);
-            emyHealth.enemyHP = enemyData.EnemyHealth;
+            string file = Application.persistentDataPath + "/" + gameObject.name + "SS1" + ".jaon";
+            if (File.Exists(file))
+            {
+                var jsonData = File.ReadAllText(file);
+                jsonData = EncryptDecryptData(jsonData);
+                EnemySavedData enemyData = JsonUtility.FromJson<EnemySavedData>(jsonData);
+                emyHealth.enemyHP = enemyData.EnemyHealth;
+            }
         }
-    }
-    public void EnemySaving(string SaveSlotName)
-    {
-        EnemySavedData emyData = new EnemySavedData();
-        emyData.EnemyHealth = emyHealth.enemyHP;
-        string emyDataString = JsonUtility.ToJson(emyData);
-        //Debug.Log(Application.persistentDataPath);
-        string file = Application.persistentDataPath + "/" + gameObject.name + SaveSlotName + ".jaon"; // between / & gameobject.name put saveState
-        emyDataString = EncryptDecryptData(emyDataString);
-        System.IO.File.WriteAllText(file, emyDataString);
+        else if (EmySS.lSAEmy2)
+        {
+            string file = Application.persistentDataPath + "/" + gameObject.name + "SS2" + ".jaon";
+            if (File.Exists(file))
+            {
+                var jsonData = File.ReadAllText(file);
+                jsonData = EncryptDecryptData(jsonData);
+                EnemySavedData enemyData = JsonUtility.FromJson<EnemySavedData>(jsonData);
+                emyHealth.enemyHP = enemyData.EnemyHealth;
+            }
+        }
+        else if (EmySS.lSAEmy3)
+        {
+            string file = Application.persistentDataPath + "/" + gameObject.name + "SS3" + ".jaon";
+            if (File.Exists(file))
+            {
+                var jsonData = File.ReadAllText(file);
+                jsonData = EncryptDecryptData(jsonData);
+                EnemySavedData enemyData = JsonUtility.FromJson<EnemySavedData>(jsonData);
+                emyHealth.enemyHP = enemyData.EnemyHealth;
+            }
+        }
+        else if (EmySS.lSAEmy4)
+        {
+            string file = Application.persistentDataPath + "/" + gameObject.name + "SS4" + ".jaon";
+            if (File.Exists(file))
+            {
+                var jsonData = File.ReadAllText(file);
+                jsonData = EncryptDecryptData(jsonData);
+                EnemySavedData enemyData = JsonUtility.FromJson<EnemySavedData>(jsonData);
+                emyHealth.enemyHP = enemyData.EnemyHealth;
+            }
+        }
     }
 }
 public class EnemySavedData

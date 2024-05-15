@@ -10,6 +10,7 @@ public class TikiTimBossFight : MonoBehaviour
     [Header("Connections")]
     [SerializeField] GameObject player;
     [SerializeField] int bossHealth = 100;
+    [SerializeField] int bossSpeedHard = 10;
     [SerializeField] GameObject bossArea;
 
     [Header("showing Boss Health & Text")]
@@ -89,7 +90,7 @@ public class TikiTimBossFight : MonoBehaviour
             boosHealthSlider.value = bossHealth;
             bossDmg *= hardMode.timesDiffuculty;
             bossHitCoolDown -= 1;
-            agent.speed += 2;
+            agent.speed = bossSpeedHard;
             hardModeStarted = true;
         }
             Debug.Log(isAttacking);
