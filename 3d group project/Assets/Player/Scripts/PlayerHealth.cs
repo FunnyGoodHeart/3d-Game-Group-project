@@ -22,6 +22,7 @@ public class PlayerHealth : MonoBehaviour
     GameObject emyHitBox;
     EnemyCloseAtk emyATK;
     EnemyAmmo emyAm;
+    PauseMenu PM;
 
     TextMeshProUGUI emeraldCountTxt;
     bool firstEmerald = true;
@@ -42,6 +43,7 @@ public class PlayerHealth : MonoBehaviour
         if (playerHP <= 0)
         {
             deathScreen.enabled = true;
+            PM.CursorChange();
         }
     }
     private void OnTriggerEnter(Collider collison)

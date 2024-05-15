@@ -58,8 +58,7 @@ public class EnemyHealth : MonoBehaviour
             {
                 GameObject item = Instantiate(bulletItem, transform.position, Quaternion.identity);
             }
-            Emymove.enabled = false;
-            charactermovement.position = new Vector3(0, 0, 0);
+            Destroy(gameObject);
         }
     }
     private void OnTriggerEnter(Collider collision)

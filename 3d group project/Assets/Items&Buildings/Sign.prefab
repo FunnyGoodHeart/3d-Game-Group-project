@@ -67,8 +67,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: The One Side of the Sign
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 979bbecc9c64f8340b84e3666d60ed07, type: 2}
+  m_sharedMaterial: {fileID: 6869730759409726773, guid: 979bbecc9c64f8340b84e3666d60ed07, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -92,8 +92,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 88.09
-  m_fontSizeBase: 88.09
+  m_fontSize: 100.88
+  m_fontSizeBase: 100.88
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -405,8 +405,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: The Other Side of the Sign
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 979bbecc9c64f8340b84e3666d60ed07, type: 2}
+  m_sharedMaterial: {fileID: 6869730759409726773, guid: 979bbecc9c64f8340b84e3666d60ed07, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -430,8 +430,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 88.09
-  m_fontSizeBase: 88.09
+  m_fontSize: 100.88
+  m_fontSizeBase: 100.88
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -494,35 +494,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4519725ad92101b4cbe5e7de41cd2a80, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 313.22
+      value: 588.60803
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4519725ad92101b4cbe5e7de41cd2a80, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 11.24
+      value: 39.68157
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4519725ad92101b4cbe5e7de41cd2a80, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 89.266
+      value: 147.56483
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4519725ad92101b4cbe5e7de41cd2a80, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071067
+      value: 0.32818884
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4519725ad92101b4cbe5e7de41cd2a80, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.7071068
+      value: -0.32818884
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4519725ad92101b4cbe5e7de41cd2a80, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0.62633234
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4519725ad92101b4cbe5e7de41cd2a80, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: -0.6263322
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4519725ad92101b4cbe5e7de41cd2a80, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4519725ad92101b4cbe5e7de41cd2a80, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -530,7 +530,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4519725ad92101b4cbe5e7de41cd2a80, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: -124.692
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 4519725ad92101b4cbe5e7de41cd2a80, type: 3}
       propertyPath: m_Materials.Array.data[0]

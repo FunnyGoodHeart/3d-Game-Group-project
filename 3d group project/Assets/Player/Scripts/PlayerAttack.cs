@@ -205,6 +205,8 @@ public class PlayerAttack : MonoBehaviour
         if(other.gameObject.tag == "Campfire")
         {
             nearCampfire = true;
+            interact.enabled = true;
+            interact.text = "Press E To Campfire";
         }
     }
     private void OnTriggerExit(Collider other)
@@ -228,6 +230,7 @@ public class PlayerAttack : MonoBehaviour
         if(other.gameObject.tag == "Campfire")
         {
             nearCampfire = false;
+            interact.enabled = false;
         }
     }
     void OnInteract()

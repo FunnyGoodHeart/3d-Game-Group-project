@@ -12,6 +12,8 @@ public class TikiTimBossFight : MonoBehaviour
     [SerializeField] int bossHealth = 100;
     [SerializeField] int bossSpeedHard = 10;
     [SerializeField] GameObject bossArea;
+    [SerializeField] GameObject doorBlock;
+    [SerializeField] Canvas WinScreen;
 
     [Header("showing Boss Health & Text")]
     [SerializeField] GameObject bossHealthSliderPart;
@@ -38,6 +40,8 @@ public class TikiTimBossFight : MonoBehaviour
     NavMeshAgent agent;
     PlayerAttack plAtk;
     Animator ani;
+    MeshRenderer dBMesh;
+    MeshCollider dBColli;
 
     //ect
     int slapOrStomp;
@@ -46,8 +50,10 @@ public class TikiTimBossFight : MonoBehaviour
     bool cDActive = false;
     bool justHit = false;
     bool bossHealthShowing = false;
+    bool win = false;
     int maxBossHealth;
     float timer;
+    float winUptimer;
 
     //hard mode
     HardModeSkull hardMode;
@@ -60,6 +66,9 @@ public class TikiTimBossFight : MonoBehaviour
         BA = bossArea.GetComponent<InBossArena>();
         hitBox = hitBoxBox.GetComponent<BoxCollider>();
         plRan = playerInRange.GetComponent<InPlayerRange>();
+        dBMesh = doorBlock.GetComponent<MeshRenderer>();
+        dBColli = doorBlock.GetComponent<MeshCollider>();
+
 
         hitBox.enabled = false;
         slapOrStomp = Random.Range(1, 3);
@@ -75,6 +84,7 @@ public class TikiTimBossFight : MonoBehaviour
         backGroundSlider.enabled = false;
         fillSlider.enabled = false;
         bossHealthText.enabled = false;
+        WinScreen.enabled = false;
 
         GameObject Skull = GameObject.Find("TheHardModeSkull");
         hardMode = Skull.GetComponent<HardModeSkull>();
@@ -82,6 +92,7 @@ public class TikiTimBossFight : MonoBehaviour
 
     void Update()
     {
+        winUptimer += Time.deltaTime;
         if (hardMode.startTheFire == true && hardModeStarted == false)
         {
             maxBossHealth *= hardMode.timesDiffuculty;
@@ -130,7 +141,19 @@ public class TikiTimBossFight : MonoBehaviour
             Transform stay = GetComponent<Transform>();
             agent.destination = stay.transform.position;
             ani.SetBool("IsDieing", true);
+            dBMesh.enabled = false;
+            dBColli.enabled = false;
+            WinScreen.enabled = true;
+            backGroundSlider.enabled = false;
+            fillSlider.enabled = false;
+            bossHealthText.enabled = false;
+            win = true;
+            winUptimer = 0;
             dead = true;
+        }
+        if(winUptimer >= 5 && win == true)
+        {
+            WinScreen.enabled = false;
         }
     }
     private void OnTriggerEnter(Collider other)
